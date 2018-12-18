@@ -22,7 +22,6 @@ plt.axis('equal')
 plt.title('Third Skill Maxed')
 
 plt.show()
-
 plt.pie(df['Skill Priority'].value_counts(), labels= df['Skill Priority'].value_counts().index, startangle=90,
         autopct='%1.1f%%')
 plt.show()
