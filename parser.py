@@ -50,7 +50,7 @@ for c in champions:
 with open('champions.csv', 'w') as f:
     data_writer = csv.writer(f, dialect='excel')
     data_writer.writerow(['Champion', 'First Skill Maxed', 'Second Skill Maxed', 'Third Skill Maxed',
-                          'First Skill', 'Skill Order'])
+                          'First Skill', 'Skill Priority'])
     for c in champions:
         data_writer.writerow([c, skill_priority[c][0], skill_priority[c][1], skill_priority[c][2],
                               first_lvl_skill[c], ''.join(skill_priority[c])])
