@@ -14,10 +14,7 @@ for idx, skill in enumerate(list(df.keys()[1:4])):
         plt.axis('equal')
         table = plt.table(cellText=[list(df_fsm.values)+[sum(df_fsm.values)]],
                           colLabels=list(df_fsm.index)+['Total'],
-                          rowLabels=['Champions'],
                           loc='bottom', cellLoc='center', colWidths=[0.25]*4)
-        # for key, cell in table.get_celld().items():
-        #         cell.set_linewidth(0)
         plt.title(skill, pad=-20)
 
 # Plot showing what is the second skill maxed in the case of champions who max Q first
@@ -38,7 +35,7 @@ plt.table(cellText=[list(df_sp.values)+[sum(df_sp.values)]],
           colLabels=list(df_sp.index)+['Total'],
           loc='bottom', cellLoc='center')
 plt.axis('equal')
-plt.title('Skill-leveling priority')
+plt.title('Leveling priority')
 
 # Plot what skill champions choose at level 1
 plt.figure(3)
@@ -51,3 +48,4 @@ plt.axis('equal')
 plt.title('Skill chosen at level 1')
 
 plt.show()
+

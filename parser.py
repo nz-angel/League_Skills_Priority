@@ -22,6 +22,9 @@ def get_skill_order(t):
     return [skill_id[x] for x in ls_tmp], first_skill
 
 
+# Thanks to gitHub user ngryman for the champions.json file used to build the following the list containing all
+# champions' names. Link to his repository: github.com/ngryman/lol-champions
+
 champions = ['Aatrox', 'Ahri', 'Akali', 'Alistar', 'Amumu', 'Anivia', 'Annie', 'Ashe', 'Aurelionsol', 'Azir', 'Bard',
              'Blitzcrank', 'Brand', 'Braum', 'Caitlyn', 'Camille', 'Cassiopeia', 'Chogath', 'Corki', 'Darius', 'Diana',
              'Draven', 'Drmundo', 'Ekko', 'Elise', 'Evelynn', 'Ezreal', 'Fiddlesticks', 'Fiora', 'Fizz', 'Galio',
