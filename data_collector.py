@@ -23,29 +23,38 @@ def get_skill_order(t):
     return [skill_id[x] for x in ls_tmp], first_skill
 
 
-general_data = json.loads(requests.get('https://ddragon.leagueoflegends.com/realms/na.json').content)
-patch = general_data['v']
+def main():
 
-ddragon_url = 'http://ddragon.leagueoflegends.com/cdn/{}/data/en_US/champion.json'.format(patch)
-champion_data = json.loads(requests.get(ddragon_url).content)
-champions = [x for x in champion_data['data'].keys()]
+    # Lastest patch is pulled from Riot's static data
+    general_data = json.loads(requests.get('https://ddragon.leagueoflegends.com/realms/na.json').content)
+    patch = general_data['v']
 
-skill_priority = {champ: [] for champ in champions}
-first_lvl_skill = {champ: [] for champ in champions}
-champion_class = {champ: champion_data['data'][champ]['tags'][0] for champ in champions}
-wait_time = [1.5, 2]
+    # Information on champions for the lastest patch is pulled from Riot's static data
+    ddragon_url = 'http://ddragon.leagueoflegends.com/cdn/{}/data/en_US/champion.json'.format(patch)
+    champion_data = json.loads(requests.get(ddragon_url).content)
+    champions = [x for x in champion_data['data'].keys()]
 
-for c in champions:
-    page = requests.get('https://champion.gg/champion/'+c)
-    tree = html.fromstring(page.content)
-    skill_priority[c], first_lvl_skill[c] = get_skill_order(tree)
-    sleep(choice(wait_time))
+    # Skill leveling priority is pulled from champion.gg
+    skill_priority = {champ: [] for champ in champions}
+    first_lvl_skill = {champ: [] for champ in champions}
+    champion_class = {champ: champion_data['data'][champ]['tags'][0] for champ in champions}
+    wait_time = [1.5, 2]
 
-with open('champions.csv', 'w') as f:
-    data_writer = csv.writer(f, dialect='excel')
-    data_writer.writerow(['Champion', 'First Skill Maxed', 'Second Skill Maxed', 'Third Skill Maxed',
-                          'First Skill', 'Skill Priority', 'Main Class'])
     for c in champions:
-        data_writer.writerow([c, skill_priority[c][0], skill_priority[c][1], skill_priority[c][2],
-                              first_lvl_skill[c], ''.join(skill_priority[c]), champion_class[c]])
+        page = requests.get('https://champion.gg/champion/'+c)
+        tree = html.fromstring(page.content)
+        skill_priority[c], first_lvl_skill[c] = get_skill_order(tree)
+        sleep(choice(wait_time))
 
+    # Information is classified and saved in a .csv file
+    with open('champions.csv', 'w') as f:
+        data_writer = csv.writer(f, dialect='excel')
+        data_writer.writerow(['Champion', 'First Skill Maxed', 'Second Skill Maxed', 'Third Skill Maxed',
+                              'First Skill', 'Skill Priority', 'Main Class'])
+        for c in champions:
+            data_writer.writerow([c, skill_priority[c][0], skill_priority[c][1], skill_priority[c][2],
+                                  first_lvl_skill[c], ''.join(skill_priority[c]), champion_class[c]])
+
+
+if __name__ == "__main__":
+    main()
