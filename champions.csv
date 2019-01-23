@@ -1,143 +1,1 @@
-Champion,First Skill Maxed,Second Skill Maxed,Third Skill Maxed,First Skill,Skill Priority,Main Class
-Aatrox,Q,E,W,Q,QEW,Fighter
-Ahri,Q,W,E,Q,QWE,Mage
-Akali,Q,W,E,Q,QWE,Assassin
-Alistar,Q,W,E,Q,QWE,Tank
-Amumu,E,Q,W,W,EQW,Tank
-Anivia,E,Q,W,Q,EQW,Mage
-Annie,Q,W,E,Q,QWE,Mage
-Ashe,W,Q,E,W,WQE,Marksman
-AurelionSol,W,Q,E,W,WQE,Mage
-Azir,Q,W,E,W,QWE,Mage
-Bard,Q,W,E,Q,QWE,Support
-Blitzcrank,Q,E,W,Q,QEW,Tank
-Brand,W,Q,E,W,WQE,Mage
-Braum,Q,E,W,Q,QEW,Support
-Caitlyn,Q,W,E,Q,QWE,Marksman
-Camille,E,Q,W,Q,EQW,Fighter
-Cassiopeia,Q,W,E,Q,QWE,Mage
-Chogath,E,W,Q,E,EWQ,Tank
-Corki,Q,E,W,Q,QEW,Marksman
-Darius,Q,E,W,Q,QEW,Fighter
-Diana,Q,W,E,Q,QWE,Fighter
-Draven,Q,W,E,Q,QWE,Marksman
-DrMundo,Q,E,W,Q,QEW,Fighter
-Ekko,Q,E,W,Q,QEW,Assassin
-Elise,Q,W,E,W,QWE,Mage
-Evelynn,Q,E,W,Q,QEW,Assassin
-Ezreal,Q,E,W,Q,QEW,Marksman
-Fiddlesticks,E,Q,W,E,EQW,Mage
-Fiora,Q,E,W,Q,QEW,Fighter
-Fizz,E,W,Q,E,EWQ,Assassin
-Galio,Q,W,E,Q,QWE,Tank
-Gangplank,Q,E,W,Q,QEW,Fighter
-Garen,Q,E,W,Q,QEW,Fighter
-Gnar,Q,W,E,Q,QWE,Fighter
-Gragas,Q,E,W,W,QEW,Fighter
-Graves,Q,E,W,E,QEW,Marksman
-Hecarim,Q,E,W,Q,QEW,Fighter
-Heimerdinger,W,Q,E,Q,WQE,Mage
-Illaoi,E,Q,W,Q,EQW,Fighter
-Irelia,Q,E,W,Q,QEW,Fighter
-Ivern,E,Q,W,Q,EQW,Support
-Janna,W,E,Q,W,WEQ,Support
-JarvanIV,Q,E,W,E,QEW,Tank
-Jax,W,Q,E,E,WQE,Fighter
-Jayce,Q,W,E,Q,QWE,Fighter
-Jhin,Q,W,E,Q,QWE,Marksman
-Jinx,Q,W,E,Q,QWE,Marksman
-Kaisa,Q,E,W,Q,QEW,Marksman
-Kalista,E,Q,W,E,EQW,Marksman
-Karma,Q,E,W,Q,QEW,Mage
-Karthus,Q,E,W,Q,QEW,Mage
-Kassadin,Q,E,W,Q,QEW,Assassin
-Katarina,Q,E,W,Q,QEW,Assassin
-Kayle,E,Q,W,E,EQW,Fighter
-Kayn,Q,W,E,Q,QWE,Fighter
-Kennen,Q,W,E,Q,QWE,Mage
-Khazix,Q,W,E,Q,QWE,Assassin
-Kindred,Q,W,E,W,QWE,Marksman
-Kled,Q,W,E,Q,QWE,Fighter
-KogMaw,W,Q,E,W,WQE,Marksman
-Leblanc,W,Q,E,W,WQE,Assassin
-LeeSin,Q,W,E,Q,QWE,Fighter
-Leona,W,E,Q,Q,WEQ,Tank
-Lissandra,Q,W,E,Q,QWE,Mage
-Lucian,Q,E,W,Q,QEW,Marksman
-Lulu,E,W,Q,E,EWQ,Support
-Lux,E,Q,W,E,EQW,Mage
-Malphite,Q,E,W,Q,QEW,Tank
-Malzahar,E,Q,W,E,EQW,Mage
-Maokai,Q,W,E,Q,QWE,Tank
-MasterYi,Q,E,W,Q,QEW,Assassin
-MissFortune,Q,W,E,Q,QWE,Marksman
-MonkeyKing,E,Q,W,E,EQW,Fighter
-Mordekaiser,W,E,Q,W,WEQ,Fighter
-Morgana,Q,W,E,Q,QWE,Mage
-Nami,W,E,Q,W,WEQ,Support
-Nasus,Q,E,W,Q,QEW,Fighter
-Nautilus,E,W,Q,Q,EWQ,Tank
-Neeko,Q,E,W,Q,QEW,Mage
-Nidalee,Q,E,W,Q,QEW,Assassin
-Nocturne,Q,E,W,Q,QEW,Assassin
-Nunu,Q,W,E,Q,QWE,Tank
-Olaf,Q,E,W,Q,QEW,Fighter
-Orianna,Q,W,E,Q,QWE,Mage
-Ornn,W,Q,E,W,WQE,Tank
-Pantheon,Q,E,W,Q,QEW,Fighter
-Poppy,Q,E,W,Q,QEW,Tank
-Pyke,Q,E,W,Q,QEW,Support
-Quinn,Q,E,W,E,QEW,Marksman
-Rakan,Q,E,W,Q,QEW,Support
-Rammus,Q,E,W,W,QEW,Tank
-RekSai,Q,E,W,Q,QEW,Fighter
-Renekton,Q,E,W,Q,QEW,Fighter
-Rengar,Q,E,W,Q,QEW,Assassin
-Riven,Q,E,W,Q,QEW,Fighter
-Rumble,Q,E,W,Q,QEW,Fighter
-Ryze,Q,E,W,E,QEW,Mage
-Sejuani,W,E,Q,E,WEQ,Tank
-Shaco,E,Q,W,W,EQW,Assassin
-Shen,Q,E,W,Q,QEW,Tank
-Shyvana,W,E,Q,W,WEQ,Fighter
-Singed,Q,E,W,Q,QEW,Tank
-Sion,Q,W,E,Q,QWE,Tank
-Sivir,Q,W,E,Q,QWE,Marksman
-Skarner,Q,W,E,Q,QWE,Fighter
-Sona,Q,W,E,Q,QWE,Support
-Soraka,W,Q,E,Q,WQE,Support
-Swain,Q,E,W,Q,QEW,Mage
-Syndra,Q,E,W,Q,QEW,Mage
-TahmKench,Q,W,E,Q,QWE,Support
-Taliyah,Q,E,W,Q,QEW,Mage
-Talon,W,Q,E,W,WQE,Assassin
-Taric,E,Q,W,E,EQW,Support
-Teemo,E,Q,W,E,EQW,Marksman
-Thresh,Q,E,W,Q,QEW,Support
-Tristana,E,Q,W,E,EQW,Marksman
-Trundle,Q,W,E,Q,QWE,Fighter
-Tryndamere,Q,E,W,E,QEW,Fighter
-TwistedFate,Q,W,E,W,QWE,Mage
-Twitch,E,Q,W,E,EQW,Marksman
-Udyr,Q,E,W,Q,QEW,Fighter
-Urgot,Q,W,E,Q,QWE,Fighter
-Varus,Q,W,E,Q,QWE,Marksman
-Vayne,Q,W,E,Q,QWE,Marksman
-Veigar,Q,W,E,Q,QWE,Mage
-Velkoz,Q,W,E,Q,QWE,Mage
-Vi,Q,E,W,W,QEW,Fighter
-Viktor,Q,E,W,Q,QEW,Mage
-Vladimir,Q,E,W,Q,QEW,Mage
-Volibear,W,Q,E,W,WQE,Fighter
-Warwick,W,Q,E,Q,WQE,Fighter
-Xayah,E,W,Q,Q,EWQ,Marksman
-Xerath,Q,W,E,Q,QWE,Mage
-XinZhao,W,E,Q,E,WEQ,Fighter
-Yasuo,Q,E,W,Q,QEW,Fighter
-Yorick,Q,E,W,Q,QEW,Fighter
-Zac,E,W,Q,W,EWQ,Tank
-Zed,Q,E,W,Q,QEW,Assassin
-Ziggs,Q,E,W,Q,QEW,Mage
-Zilean,Q,E,W,Q,QEW,Support
-Zoe,Q,E,W,Q,QEW,Mage
-Zyra,Q,E,W,Q,QEW,Mage
+Champion,First Skill Maxed,Second Skill Maxed,Third Skill Maxed,First Skill,Skill Priority,Main ClassAatrox,Q,E,W,Q,QEW,FighterAhri,Q,W,E,Q,QWE,MageAkali,Q,W,E,Q,QWE,AssassinAlistar,Q,W,E,Q,QWE,TankAmumu,E,Q,W,W,EQW,TankAnivia,E,Q,W,Q,EQW,MageAnnie,Q,W,E,Q,QWE,MageAshe,W,Q,E,W,WQE,MarksmanAurelionSol,W,Q,E,W,WQE,MageAzir,Q,W,E,W,QWE,MageBard,Q,W,E,Q,QWE,SupportBlitzcrank,Q,E,W,Q,QEW,TankBrand,W,Q,E,W,WQE,MageBraum,Q,E,W,Q,QEW,SupportCaitlyn,Q,W,E,Q,QWE,MarksmanCamille,E,Q,W,Q,EQW,FighterCassiopeia,Q,W,E,Q,QWE,MageChogath,E,W,Q,E,EWQ,TankCorki,Q,E,W,Q,QEW,MarksmanDarius,Q,E,W,Q,QEW,FighterDiana,Q,W,E,Q,QWE,FighterDraven,Q,W,E,Q,QWE,MarksmanDrMundo,Q,E,W,Q,QEW,FighterEkko,Q,E,W,Q,QEW,AssassinElise,Q,W,E,W,QWE,MageEvelynn,Q,E,W,Q,QEW,AssassinEzreal,Q,E,W,Q,QEW,MarksmanFiddlesticks,E,Q,W,E,EQW,MageFiora,Q,E,W,Q,QEW,FighterFizz,E,W,Q,E,EWQ,AssassinGalio,Q,W,E,Q,QWE,TankGangplank,Q,E,W,Q,QEW,FighterGaren,Q,E,W,Q,QEW,FighterGnar,Q,W,E,Q,QWE,FighterGragas,Q,E,W,W,QEW,FighterGraves,Q,E,W,E,QEW,MarksmanHecarim,Q,E,W,Q,QEW,FighterHeimerdinger,W,Q,E,Q,WQE,MageIllaoi,E,Q,W,Q,EQW,FighterIrelia,Q,E,W,Q,QEW,FighterIvern,E,Q,W,Q,EQW,SupportJanna,W,E,Q,W,WEQ,SupportJarvanIV,Q,E,W,E,QEW,TankJax,W,Q,E,E,WQE,FighterJayce,Q,W,E,Q,QWE,FighterJhin,Q,W,E,Q,QWE,MarksmanJinx,Q,W,E,Q,QWE,MarksmanKaisa,Q,E,W,Q,QEW,MarksmanKalista,E,Q,W,E,EQW,MarksmanKarma,Q,E,W,Q,QEW,MageKarthus,Q,E,W,Q,QEW,MageKassadin,Q,E,W,Q,QEW,AssassinKatarina,Q,E,W,Q,QEW,AssassinKayle,E,Q,W,E,EQW,FighterKayn,Q,W,E,Q,QWE,FighterKennen,Q,W,E,Q,QWE,MageKhazix,Q,W,E,Q,QWE,AssassinKindred,Q,W,E,W,QWE,MarksmanKled,Q,W,E,Q,QWE,FighterKogMaw,W,Q,E,W,WQE,MarksmanLeblanc,W,Q,E,W,WQE,AssassinLeeSin,Q,W,E,Q,QWE,FighterLeona,W,E,Q,Q,WEQ,TankLissandra,Q,W,E,Q,QWE,MageLucian,Q,E,W,Q,QEW,MarksmanLulu,E,W,Q,E,EWQ,SupportLux,E,Q,W,E,EQW,MageMalphite,Q,E,W,Q,QEW,TankMalzahar,E,Q,W,E,EQW,MageMaokai,Q,W,E,Q,QWE,TankMasterYi,Q,E,W,Q,QEW,AssassinMissFortune,Q,W,E,Q,QWE,MarksmanMonkeyKing,E,Q,W,E,EQW,FighterMordekaiser,W,E,Q,W,WEQ,FighterMorgana,Q,W,E,Q,QWE,MageNami,W,E,Q,W,WEQ,SupportNasus,Q,E,W,Q,QEW,FighterNautilus,E,W,Q,Q,EWQ,TankNeeko,Q,E,W,Q,QEW,MageNidalee,Q,E,W,Q,QEW,AssassinNocturne,Q,E,W,Q,QEW,AssassinNunu,Q,W,E,Q,QWE,TankOlaf,Q,E,W,Q,QEW,FighterOrianna,Q,W,E,Q,QWE,MageOrnn,W,Q,E,W,WQE,TankPantheon,Q,E,W,Q,QEW,FighterPoppy,Q,E,W,Q,QEW,TankPyke,Q,E,W,Q,QEW,SupportQuinn,Q,E,W,E,QEW,MarksmanRakan,Q,E,W,Q,QEW,SupportRammus,Q,E,W,W,QEW,TankRekSai,Q,E,W,Q,QEW,FighterRenekton,Q,E,W,Q,QEW,FighterRengar,Q,E,W,Q,QEW,AssassinRiven,Q,E,W,Q,QEW,FighterRumble,Q,E,W,Q,QEW,FighterRyze,Q,E,W,E,QEW,MageSejuani,W,E,Q,E,WEQ,TankShaco,E,Q,W,W,EQW,AssassinShen,Q,E,W,Q,QEW,TankShyvana,W,E,Q,W,WEQ,FighterSinged,Q,E,W,Q,QEW,TankSion,Q,W,E,Q,QWE,TankSivir,Q,W,E,Q,QWE,MarksmanSkarner,Q,W,E,Q,QWE,FighterSona,Q,W,E,Q,QWE,SupportSoraka,W,Q,E,Q,WQE,SupportSwain,Q,E,W,Q,QEW,MageSyndra,Q,E,W,Q,QEW,MageTahmKench,Q,W,E,Q,QWE,SupportTaliyah,Q,E,W,Q,QEW,MageTalon,W,Q,E,W,WQE,AssassinTaric,E,Q,W,E,EQW,SupportTeemo,E,Q,W,E,EQW,MarksmanThresh,Q,E,W,Q,QEW,SupportTristana,E,Q,W,E,EQW,MarksmanTrundle,Q,W,E,Q,QWE,FighterTryndamere,Q,E,W,E,QEW,FighterTwistedFate,Q,W,E,W,WE,MageTwitch,E,Q,W,E,EQW,MarksmanUdyr,Q,E,W,Q,QEW,FighterUrgot,Q,W,E,Q,QWE,FighterVarus,Q,W,E,Q,QWE,MarksmanVayne,Q,W,E,Q,QWE,MarksmanVeigar,Q,W,E,Q,QWE,MageVelkoz,Q,W,E,Q,QWE,MageVi,Q,E,W,W,QEW,FighterViktor,Q,E,W,Q,QEW,MageVladimir,Q,E,W,Q,QEW,MageVolibear,W,Q,E,W,WQE,FighterWarwick,W,Q,E,Q,WQE,FighterXayah,E,W,Q,Q,EWQ,MarksmanXerath,Q,W,E,Q,QWE,MageXinZhao,W,E,Q,E,WEQ,FighterYasuo,Q,E,W,Q,QEW,FighterYorick,Q,E,W,Q,QEW,FighterZac,E,W,Q,W,EWQ,TankZed,Q,E,W,Q,QEW,AssassinZiggs,Q,E,W,Q,QEW,MageZilean,Q,E,W,Q,QEW,SupportZoe,Q,E,W,Q,QEW,MageZyra,Q,E,W,Q,QEW,Mage

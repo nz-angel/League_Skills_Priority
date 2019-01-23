@@ -24,6 +24,7 @@ def get_skill_order(t):
 
 
 def main():
+
     # Lastest patch is pulled from Riot's static data
     general_data = json.loads(requests.get('https://ddragon.leagueoflegends.com/realms/na.json').content)
     patch = general_data['v']
