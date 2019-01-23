@@ -2,6 +2,7 @@ from time import sleep
 from random import choice
 import csv
 import requests
+import json
 from lxml import html
 
 
@@ -22,26 +23,16 @@ def get_skill_order(t):
     return [skill_id[x] for x in ls_tmp], first_skill
 
 
-# Thanks to gitHub user ngryman for the champions.json file used to build the following the list containing all
-# champions' names. Link to his repository: github.com/ngryman/lol-champions
+general_data = json.loads(requests.get('https://ddragon.leagueoflegends.com/realms/na.json').content)
+patch = general_data['v']
 
-champions = ['Aatrox', 'Ahri', 'Akali', 'Alistar', 'Amumu', 'Anivia', 'Annie', 'Ashe', 'Aurelionsol', 'Azir', 'Bard',
-             'Blitzcrank', 'Brand', 'Braum', 'Caitlyn', 'Camille', 'Cassiopeia', 'Chogath', 'Corki', 'Darius', 'Diana',
-             'Draven', 'Drmundo', 'Ekko', 'Elise', 'Evelynn', 'Ezreal', 'Fiddlesticks', 'Fiora', 'Fizz', 'Galio',
-             'Gangplank', 'Garen', 'Gnar', 'Gragas', 'Graves', 'Hecarim', 'Heimerdinger', 'Illaoi', 'Irelia', 'Ivern',
-             'Janna', 'Jarvaniv', 'Jax', 'Jayce', 'Jhin', 'Jinx', 'Kaisa', 'Kalista', 'Karma', 'Karthus', 'Kassadin',
-             'Katarina', 'Kayle', 'Kayn', 'Kennen', 'Khazix', 'Kindred', 'Kled', 'Kogmaw', 'Leblanc', 'Leesin', 'Leona',
-             'Lissandra', 'Lucian', 'Lulu', 'Lux', 'Malphite', 'Malzahar', 'Maokai', 'Masteryi', 'Missfortune',
-             'Monkeyking', 'Mordekaiser', 'Morgana', 'Nami', 'Nasus', 'Nautilus', 'Neeko', 'Nidalee', 'Nocturne',
-             'Nunu', 'Olaf', 'Orianna', 'Ornn', 'Pantheon', 'Poppy', 'Pyke', 'Quinn', 'Rakan', 'Rammus', 'Reksai',
-             'Renekton', 'Rengar', 'Riven', 'Rumble', 'Ryze', 'Sejuani', 'Shaco', 'Shen', 'Shyvana', 'Singed', 'Sion',
-             'Sivir', 'Skarner', 'Sona', 'Soraka', 'Swain', 'Syndra', 'Tahmkench', 'Taliyah', 'Talon', 'Taric', 'Teemo',
-             'Thresh', 'Tristana', 'Trundle', 'Tryndamere', 'Twistedfate', 'Twitch', 'Udyr', 'Urgot', 'Varus', 'Vayne',
-             'Veigar', 'Velkoz', 'Vi', 'Viktor', 'Vladimir', 'Volibear', 'Warwick', 'Xayah', 'Xerath', 'Xinzhao',
-             'Yasuo', 'Yorick', 'Zac', 'Zed', 'Ziggs', 'Zilean', 'Zoe', 'Zyra']
+ddragon_url = 'http://ddragon.leagueoflegends.com/cdn/{}/data/en_US/champion.json'.format(patch)
+champion_data = json.loads(requests.get(ddragon_url).content)
+champions = [x for x in champion_data['data'].keys()]
 
 skill_priority = {champ: [] for champ in champions}
 first_lvl_skill = {champ: [] for champ in champions}
+champion_class = {champ: champion_data['data'][champ]['tags'][0] for champ in champions}
 wait_time = [1.5, 2]
 
 for c in champions:
@@ -53,8 +44,8 @@ for c in champions:
 with open('champions.csv', 'w') as f:
     data_writer = csv.writer(f, dialect='excel')
     data_writer.writerow(['Champion', 'First Skill Maxed', 'Second Skill Maxed', 'Third Skill Maxed',
-                          'First Skill', 'Skill Priority'])
+                          'First Skill', 'Skill Priority', 'Main Class'])
     for c in champions:
         data_writer.writerow([c, skill_priority[c][0], skill_priority[c][1], skill_priority[c][2],
-                              first_lvl_skill[c], ''.join(skill_priority[c])])
+                              first_lvl_skill[c], ''.join(skill_priority[c]), champion_class[c]])
 
