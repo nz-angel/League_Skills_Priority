@@ -35,6 +35,17 @@ def main():
     champion_data = json.loads(requests.get(ddragon_url).content)
     champions = [x for x in champion_data['data'].keys()]
 
+    # Skill leveling priority is pulled from champion.gg
+    skill_priority = {champ: [] for champ in champions}
+    first_lvl_skill = {champ: [] for champ in champions}
+    wait_time = [1.5, 2]
+
+    for c in tqdm(champions):
+        page = requests.get('https://champion.gg/champion/'+c)
+        tree = html.fromstring(page.content)
+        skill_priority[c], first_lvl_skill[c] = get_skill_order(tree)
+        sleep(choice(wait_time))
+
     # Get class, subclass and release date of every champion (pulled from League of Legends wiki)
     champion_rd = {champ: 2019 for champ in champions}
     champion_class = {champ: 0 for champ in champions}
@@ -54,11 +65,12 @@ def main():
                           'Specialist': 'Specialist'}
     wiki_class_page = requests.get('https://leagueoflegends.fandom.com/wiki/List_of_champions')
     tree = html.fromstring(wiki_class_page.content)
-    for idx, champ in enumerate(champions):
-        subclass = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[2]/@data-sort-value'.format(idx+2))[0]
-        release_date = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[4]'.format(idx+2))[0].text
+    for idx in range(2, len(champions)+2):
+        champ = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[1]/@data-sort-value'.format(idx))[0]
+        subclass = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[2]/@data-sort-value'.format(idx))[0]
+        release_date = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[4]'.format(idx))[0].text
         if release_date == ' ':
-            release_date = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[4]/span'.format(idx + 2))[0].text
+            release_date = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[4]/span'.format(idx))[0].text
 
         champion_subclass[champ] = subclass
         champion_class[champ] = subclass_belonging[subclass]
@@ -84,16 +96,6 @@ def main():
         i += 1
     champion_full_vgu['Aatrox'] = 2018  # Aatrox received a full VGU in 2018 but the Wiki only has 'VGU'
 
-    # Skill leveling priority is pulled from champion.gg
-    skill_priority = {champ: [] for champ in champions}
-    first_lvl_skill = {champ: [] for champ in champions}
-    wait_time = [1.5, 2]
-
-    for c in tqdm(champions):
-        page = requests.get('https://champion.gg/champion/'+c)
-        tree = html.fromstring(page.content)
-        skill_priority[c], first_lvl_skill[c] = get_skill_order(tree)
-        sleep(choice(wait_time))
 
     # Information is classified and saved in a .csv file
     with open('champions.csv', 'w') as f:
