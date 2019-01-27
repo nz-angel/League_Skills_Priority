@@ -45,6 +45,13 @@ def main():
         tree = html.fromstring(page.content)
         skill_priority[c], first_lvl_skill[c] = get_skill_order(tree)
         sleep(choice(wait_time))
+    wu_values = (skill_priority.pop('MonkeyKing'), first_lvl_skill.pop('MonkeyKing'))
+    champions.remove('MonkeyKing')
+    champions.append('Wukong')
+    champions.sort()
+    skill_priority['Wukong'] = wu_values[0]
+    first_lvl_skill['Wukong'] = wu_values[1]
+
 
     # Get class, subclass and release date of every champion (pulled from League of Legends wiki)
     champion_rd = {champ: 2019 for champ in champions}
@@ -66,7 +73,8 @@ def main():
     wiki_class_page = requests.get('https://leagueoflegends.fandom.com/wiki/List_of_champions')
     tree = html.fromstring(wiki_class_page.content)
     for idx in range(2, len(champions)+2):
-        champ = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[1]/@data-sort-value'.format(idx))[0]
+        # champ = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[1]/@data-sort-value'.format(idx))[0]
+        champ = champions[idx-2]
         subclass = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[2]/@data-sort-value'.format(idx))[0]
         release_date = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[4]'.format(idx))[0].text
         if release_date == ' ':
