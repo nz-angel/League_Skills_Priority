@@ -40,7 +40,7 @@ def main():
     first_lvl_skill = {champ: [] for champ in champions}
     wait_time = [1.5, 2]
 
-    for c in tqdm(champions):
+    for c in tqdm(champions, postfix='Getting skill priority information'):
         page = requests.get('https://champion.gg/champion/'+c)
         tree = html.fromstring(page.content)
         skill_priority[c], first_lvl_skill[c] = get_skill_order(tree)
@@ -84,7 +84,7 @@ def main():
         champion_rd[champ] = release_date.strip()[:4]
 
     # Get dates for champions who received a complete VGU (pulled from League of Legends wiki) who are described as
-    # getting a 'Full relauch'
+    # getting a 'Full relaunch'
     champion_full_vgu = {champ: champion_rd[champ] for champ in champions}
     wiki_update_page = requests.get('https://leagueoflegends.fandom.com/wiki/Champion_updates')
     tree = html.fromstring(wiki_update_page.content)
