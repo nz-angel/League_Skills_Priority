@@ -26,7 +26,7 @@ def get_skill_order(t):
 
 def main():
 
-    # Lastest patch is pulled from Riot's static data
+    # Latest patch is pulled from Riot's static data
     general_data = json.loads(requests.get('https://ddragon.leagueoflegends.com/realms/na.json').content)
     patch = general_data['v']
 
@@ -51,7 +51,6 @@ def main():
     champions.sort()
     skill_priority['Wukong'] = wu_values[0]
     first_lvl_skill['Wukong'] = wu_values[1]
-
 
     # Get class, subclass and release date of every champion (pulled from League of Legends wiki)
     champion_rd = {champ: 2019 for champ in champions}
@@ -103,7 +102,6 @@ def main():
                 champion_full_vgu[champ] = date.strip()[:4]
         i += 1
     champion_full_vgu['Aatrox'] = 2018  # Aatrox received a full VGU in 2018 but the Wiki only has 'VGU'
-
 
     # Information is classified and saved in a .csv file
     with open('champions.csv', 'w') as f:
