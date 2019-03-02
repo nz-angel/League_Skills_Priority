@@ -4,6 +4,7 @@ import pandas as pd
 import datetime
 import os
 
+
 def plot_pie_chart(df_val_counts, title):
     global plt_number
     plt.figure(plt_number)
@@ -12,7 +13,7 @@ def plot_pie_chart(df_val_counts, title):
     else:
         color_dict = coldic_2
     plt.pie(df_val_counts, labels=df_val_counts.index, colors=[color_dict[x] for x in df_val_counts.index],
-            startangle=90, autopct='%1.1f%%', pctdistance=0.85)
+            startangle=90, autopct='%1.1f%%', pctdistance=0.85, textprops={'weight': 'bold'})
     centre_circle = plt.Circle((0, 0), 0.70, fc='white')
     plt.axis('equal')
     plt.gca().add_artist(centre_circle)
@@ -29,9 +30,10 @@ def plot_donut(data_frame, title):
     df_lp.sort_index(inplace=True)
     plt.figure(plt_number)
     plt.pie(df_fsm, labels=df_fsm.index, colors=[coldic[x] for x in df_fsm.index],
-            startangle=90, autopct='%1.1f%%', pctdistance=0.85)
+            startangle=90, autopct='%1.1f%%', pctdistance=0.85, textprops={'weight': 'bold'})
     plt.pie(df_lp, labels=df_lp.index, colors=[coldic_2[x] for x in df_lp.index], radius=0.75, rotatelabels=45,
-            startangle=90, autopct='%1.1f%%', pctdistance=0.85, labeldistance=0.35, textprops={'fontsize': 'small'})
+            startangle=90, autopct='%1.1f%%', pctdistance=0.85, labeldistance=0.35,
+            textprops={'fontsize': 'small'})
     centre_circle = plt.Circle((0, 0), 0.5, fc='white')
     plt.axis('equal')
     plt.gca().add_artist(centre_circle)
@@ -80,6 +82,7 @@ def plot_stacked_bars(data_frame, criterion, title):
 
 def main():
     df = pd.read_csv('champions.csv')
+    dpi = 300   # charts dpi
 
     global coldic
     global coldic_2
@@ -93,7 +96,10 @@ def main():
     if not os.path.exists('Charts'):
         os.mkdir('Charts')
 
+    # Plot settings
     plt.rcParams.update({'figure.max_open_warning': 0})
+    plt.rcParams['figure.dpi'] = dpi
+
     # General plot that shows how many champions max E, Q or W and the six possible skill-maxing sequences
     plot_donut(df, 'General skill priority')
 
@@ -119,7 +125,9 @@ def main():
 
 
 if __name__ == '__main__':
+
     plt_number = 0
+
     coldic = {'Q': '#75b4ea',
               'W': '#dd8585',
               'E': '#98dd85'}
