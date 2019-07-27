@@ -1,5 +1,4 @@
 from time import sleep
-from random import choice
 import csv
 import requests
 import json
@@ -7,56 +6,8 @@ from lxml import html
 from tqdm import tqdm
 
 
-def get_skill_order(t):
-    level_max = {1: 0, 2: 0, 3: 0}
-    first_skill = 0
-    skill_id = {1: 'Q', 2: 'W', 3: 'E'}
-    for level in range(1, 19):
-        for skill in level_max.keys():
-            sq = t.cssselect(
-                'div.skill-order:nth-child(2) > div:nth-child({}) > div:nth-child(2) > div:nth-child({})'
-                .format(skill+1, level))
-            if sq[0].attrib['class'] != '':
-                level_max[skill] = level
-                if level == 1:
-                    first_skill = skill_id[skill]
-    ls_tmp = sorted(level_max.keys(), key=lambda x: level_max[x])
-    return [skill_id[x] for x in ls_tmp], first_skill
-
-
-def main():
-
-    # Latest patch is pulled from Riot's static data
-    general_data = json.loads(requests.get('https://ddragon.leagueoflegends.com/realms/na.json').content)
-    patch = general_data['v']
-
-    # Information on champions for the latest patch is pulled from Riot's static data
-    ddragon_url = 'http://ddragon.leagueoflegends.com/cdn/{}/data/en_US/champion.json'.format(patch)
-    champion_data = json.loads(requests.get(ddragon_url).content)
-    champions = [x for x in champion_data['data'].keys()]
-
-    # Skill leveling priority is pulled from champion.gg
-    skill_priority = {champ: [] for champ in champions}
-    first_lvl_skill = {champ: [] for champ in champions}
-    wait_time = [1.5, 2]
-
-    for c in tqdm(champions, postfix='Getting skill priority information'):
-        page = requests.get('https://champion.gg/champion/'+c)
-        tree = html.fromstring(page.content)
-        skill_priority[c], first_lvl_skill[c] = get_skill_order(tree)
-        sleep(choice(wait_time))
-    wu_values = (skill_priority.pop('MonkeyKing'), first_lvl_skill.pop('MonkeyKing'))
-    champions.remove('MonkeyKing')
-    champions.append('Wukong')
-    champions.sort()
-    skill_priority['Wukong'] = wu_values[0]
-    first_lvl_skill['Wukong'] = wu_values[1]
-
-    # Get class, subclass and release date of every champion (pulled from League of Legends wiki)
-    champion_rd = {champ: 2019 for champ in champions}
-    champion_class = {champ: 0 for champ in champions}
-    champion_subclass = {champ: 0 for champ in champions}
-    subclass_belonging = {'Enchanter': 'Controller',
+class Champion:
+    subclass_to_class_dict = {'Enchanter': 'Controller',
                           'Catcher': 'Controller',
                           'Diver': 'Fighter',
                           'Juggernaut': 'Fighter',
@@ -69,23 +20,82 @@ def main():
                           'Vanguard': 'Tank',
                           'Warden': 'Tank',
                           'Specialist': 'Specialist'}
+
+    def __init__(self, name):
+        if name == 'MonkeyKing':
+            name = 'Wukong'
+        self.name = name
+        self.skill_order = ()
+        self.lvl_1 = ''
+        self.class_ = ''
+        self.subclass = ''
+        self.release_ = ''
+        self.vgu = ''
+
+    def get_skill_info(self):
+        page = requests.get('https://u.gg/lol/champions/{}/build'.format(self.name))
+        tree = html.fromstring(page.content)
+        order = []
+        for i in range(1,4):
+            path = '//*[@id="content"]/div/div/div[3]/div/div[3]/div[1]/div[2]/div/div[1]/div[{}]/div'.format(i)
+            order.append(tree.xpath(path)[0].text)
+        self.skill_order = tuple(order)
+
+        for idx, skill in enumerate(['Q', 'W', 'E'], 1):
+            path = '//*[@id="content"]/div/div/div[3]/div/div[3]/div[2]/div[2]/div/div/div/div[{}]/div[3]/div[1]' \
+                .format(idx)
+            if tree.xpath(path)[0].attrib['class'] == 'skill-up ':
+                self.lvl_1 = skill
+                break
+
+    def get_info(self, webpage_tree, idx):
+        self.subclass = webpage_tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[2]/@data-sort-value'.
+                                           format(idx))[0]
+        self.class_ = self.subclass_to_class_dict[self.subclass]
+        release_date = webpage_tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[4]'.format(idx))[0].text
+        if release_date == ' ':
+            release_date = webpage_tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[4]/span'.format(idx))[
+                0].text
+        self.release_ = release_date.strip()[:4]
+        assert self.release_
+        self.vgu = self.release_
+
+    def set_vgu_info(self, year):
+        self.vgu = year
+
+
+def main():
+
+    # Latest patch is pulled from Riot's static data
+    general_data = json.loads(requests.get('https://ddragon.leagueoflegends.com/realms/na.json').content)
+    patch = general_data['v']
+
+    # Information on champions for the latest patch is pulled from Riot's static data and Champion objects are created
+    ddragon_url = 'http://ddragon.leagueoflegends.com/cdn/{}/data/en_US/champion.json'.format(patch)
+    champion_data = json.loads(requests.get(ddragon_url).content)
+    champions = [Champion(x) for x in champion_data['data'].keys()]
+
+    # Skill leveling priority is pulled from u.gg
+    for champ in tqdm(champions):
+        champ.get_skill_info()
+        sleep(1)
+
+    # Reorder the champions list alphabetically according to champion name. Swap Dr. Mundo with Draven to get the
+    # correct order in the Wiki's champion list.
+    dr_mundo = next(c for c in champions if c.name == 'DrMundo')
+    dr_mundo.name = 'Dr. Mundo'
+    champions.sort(key=lambda c: c.name)
+
+
+    # Get class, subclass and release date of every champion (pulled from League of Legends wiki)
     wiki_class_page = requests.get('https://leagueoflegends.fandom.com/wiki/List_of_champions')
     tree = html.fromstring(wiki_class_page.content)
-    for idx in range(2, len(champions)+2):
+    for idx, champ in enumerate(champions, 2):
         # champ = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[1]/@data-sort-value'.format(idx))[0]
-        champ = champions[idx-2]
-        subclass = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[2]/@data-sort-value'.format(idx))[0]
-        release_date = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[4]'.format(idx))[0].text
-        if release_date == ' ':
-            release_date = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[4]/span'.format(idx))[0].text
-
-        champion_subclass[champ] = subclass
-        champion_class[champ] = subclass_belonging[subclass]
-        champion_rd[champ] = release_date.strip()[:4]
+        champ.get_info(tree, idx)
 
     # Get dates for champions who received a complete VGU (pulled from League of Legends wiki) who are described as
     # getting a 'Full relaunch'
-    champion_full_vgu = {champ: champion_rd[champ] for champ in champions}
     wiki_update_page = requests.get('https://leagueoflegends.fandom.com/wiki/Champion_updates')
     tree = html.fromstring(wiki_update_page.content)
     i = 2
@@ -96,22 +106,31 @@ def main():
             break
 
         if 'Full Relaunch' in update_desc:
-            champ = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[1]/@data-sort-value'.format(i))[0]
+            champ_name = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[1]/@data-sort-value'.format(i))[0]
             date = tree.xpath('//*[@id="mw-content-text"]/table[2]/tr[{}]/td[3]'.format(i))[0].text
             if date.strip().startswith('20'):
-                champion_full_vgu[champ] = date.strip()[:4]
+                champ = next(c for c in champions if c.name == champ_name)
+                champ.set_vgu_info(date.strip()[:4])
+            else:
+                break
         i += 1
-    champion_full_vgu['Aatrox'] = 2018  # Aatrox received a full VGU in 2018 but the Wiki only has 'VGU'
+
+    # Correction: Aatrox got a full relaunch in 2018 and Morgana only got a visual upgrade in 2019, not a full relaunch
+    aatrox = next(c for c in champions if c.name == 'Aatrox')
+    aatrox.vgu = '2018'
+    morgana = next(c for c in champions if c.name == 'Morgana')
+    morgana.vgu = morgana.release_
 
     # Information is classified and saved in a .csv file
     with open('champions.csv', 'w') as f:
         data_writer = csv.writer(f, dialect='excel')
         data_writer.writerow(['Champion', 'First Skill Maxed', 'Second Skill Maxed', 'Third Skill Maxed',
-                              'First Skill', 'Skill Priority', 'Class', 'Subclass', 'Release Date', 'Release Date (VGU)'])
-        for c in champions:
-            data_writer.writerow([c, skill_priority[c][0], skill_priority[c][1], skill_priority[c][2],
-                                  first_lvl_skill[c], ''.join(skill_priority[c]), champion_class[c],
-                                  champion_subclass[c], champion_rd[c], champion_full_vgu[c]])
+                              'Skill Priority', 'LVL 1 Skill', 'Class', 'Subclass', 'Release Date',
+                              'Release Date (VGU)'])
+        for champ in champions:
+            data_writer.writerow([champ.name, champ.skill_order[0], champ.skill_order[1], champ.skill_order[2],
+                                  ''.join(champ.skill_order), champ.lvl_1, champ.class_, champ.subclass,
+                                  champ.release_, champ.vgu])
 
 
 if __name__ == "__main__":

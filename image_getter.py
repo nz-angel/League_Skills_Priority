@@ -25,7 +25,7 @@ def get_champion_portraits(img_dir=os.path.join(os.getcwd(), 'Champion portraits
         urllib.request.urlretrieve(ddragon_img_url, img_path)
 
 
-def get_spell_icons(img_dir=os.path.join(os.getcwd(), 'Spell icons'), N=15):
+def get_spell_icons(img_dir=os.path.join(os.getcwd(), 'Spell icons'), N=143):
     # Latest patch is pulled from Riot's static data
     general_data = json.loads(requests.get('https://ddragon.leagueoflegends.com/realms/na.json').content)
     patch = general_data['v']
@@ -51,4 +51,4 @@ def get_spell_icons(img_dir=os.path.join(os.getcwd(), 'Spell icons'), N=15):
             urllib.request.urlretrieve(spell_img_url, spell_img_path)
 
 
-get_spell_icons(N=30)
+get_champion_portraits()
